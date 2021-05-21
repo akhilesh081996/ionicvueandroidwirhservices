@@ -23,8 +23,19 @@
         >
           Add Blog
         </ion-button>
-        
+        <ion-button
+        color="primary"
+        size="small"
+        slot="end"
+        @click="() => router.push('/image')"
+      >
+       Click Image
+      </ion-button> <br>
       </ion-item>
+        <ion-item>
+        <ion-toggle @ionChange="onClick($event)"  v-model="language" slot="end"></ion-toggle>
+      </ion-item>
+    
 
       <ion-grid class="ion-margin">
         <ion-row>
@@ -35,7 +46,8 @@
         </ion-row>
         <ion-row v-for="(item, index) in users" :key="index">
           <ion-col>{{ index + 1 }}</ion-col>
-          <ion-col>{{ item.name }}</ion-col>
+
+       <ion-label >{{ $filters.timechange(item.name) }}</ion-label>
           <ion-col>{{ item.gender }}</ion-col>
           <ion-col>{{ item.country }}</ion-col>
         </ion-row>
@@ -45,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonItem, IonButton } from "@ionic/vue";
+import { IonPage, IonItem, IonButton ,IonToggle  } from "@ionic/vue";
 import { logIn } from "ionicons/icons";
 import { useRouter } from "vue-router";
 import axios from "axios";
@@ -57,6 +69,7 @@ export default {
     IonPage,
     IonItem,
     IonButton,
+    IonToggle 
   },
 
   setup() {
@@ -69,13 +82,24 @@ export default {
     };
 
     getData();
-
+    
     return {
       router,
       logIn,
       users,
+     
+
     };
   },
+  methods: {
+    async onClick(event) {
+       console.log(event.target.ariaChecked);
+   
+      
+    },
+  },
+
+
 };
 </script>
 

@@ -9,6 +9,26 @@ import Landing from '@/views/landing.vue';
 import AddBlog from '@/views/add-blog.vue';
 import Bloglist from '@/views/Bloglist.vue';
 import Accessservices from '@/views/servicefile.vue';
+import Image from '@/views/image.vue' ;
+//  import Profilepage from '@/views/ProfilePage.vue' ;
+
+
+
+
+
+function guardMyroute(to, from, next)
+{
+  const token = localStorage.getItem("token");
+  console.log(token)
+
+
+  if(token == 'false') {
+    next('/landing');
+  }
+  else{
+    next()
+  }
+}
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,42 +48,64 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
+    // beforeEnter : guardMyroute,
     component: Home
   },
   {
     path: '/add-user',
     name: 'add-user',
+    // beforeEnter : guardMyroute,
     component: AddUser
   },
   {
     path: '/blogs',
     name: 'blog-container',
+    // beforeEnter : guardMyroute,
     component: blogContainer
   },
 
   {
     path: '/blogs',
     name: 'blog-container',
+    // beforeEnter : guardMyroute,
     component: blogContainer
   },
   {
     path: '/add-blog',
     name: 'add-blog',
+    // beforeEnter : guardMyroute,
     component: AddBlog
   },
   {
     path: '/blog-list',
     name: 'blog-list',
+    beforeEnter : guardMyroute,
     component: Bloglist
   },
   {
     path: '/accessservices',
     name: 'accessservices',
+    beforeEnter : guardMyroute,
     component: Accessservices
   },
-  
+  {
+    path: '/image',
+    name: 'image',
+    component: Image
+  },
+  // {
+  //   path: '/accountinfo',
+  //   name: 'accountinfo',
+  //   component: Account
+  // }, 
+  // {
+  //   path: '/profilepage',
+  //   name: 'profilepage',
+  //   component: Profilepage
+  // }, 
  {
     path: '/tabs/',
+    beforeEnter : guardMyroute,
     component: Tabs,
     children: [
       {

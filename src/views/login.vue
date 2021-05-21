@@ -39,6 +39,7 @@ import {
 import { logIn } from "ionicons/icons";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import axiosinstance from './Axiosinterspector'
 
 export default {
   name: "SignIn",
@@ -63,7 +64,7 @@ export default {
     };
 
     const handleLogin = (form: any) => {
-      axios
+      axiosinstance
         .get("/assets/login.json")
         .then((response: any) => {
           console.log(form);
